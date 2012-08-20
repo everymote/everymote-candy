@@ -4,6 +4,6 @@
   ,"description": "Tellstick client for connecting things to everymote"
   ,"homepage": "http://www.everymote.com"
   ,"dependencies": { 
-	  	"socket.io-client":"git://github.com/kazuyukitanimura/socket.io-client.git" 
+	  	"socket.io-client":"" 
 	}
 }
