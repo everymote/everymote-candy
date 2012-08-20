@@ -1,16 +1,10 @@
 var io = require('socket.io-client'),
-   tellstick = require('./candy');
+   candy = require('./candy');
 
-var port = '1337',
-	server =  '127.0.0.1';
+var port = '80',
+	server =  'thing.everymote.com';
 
 
-var http = require('http');
-http.createServer(function (req, res) {
-  res.writeHead(200, {'Content-Type': 'text/plain'});
-  res.end('Hello World\n');
-}).listen(1338, '127.0.0.1');
-console.log('Server running at http://127.0.0.1:1338/');
 
 var connectCandy = function(thing){
 	console.log(thing);
@@ -26,12 +20,11 @@ var connectCandy = function(thing){
 		socket.emit('setup', thing);
 	}).on('doAction', function (action) {
 		console.log(action);
-		if(action == "Candy please!"){
-			tellstick.relese(thing);			
-		}else if(action== "One"){
-			tellstick.relese(thing);		
-		}else if(action== "Two"){
-			tellstick.relese(thing);		
+		if(action.id  == "1"){
+			candy.relese(thing);			
+		}else if(action.id == "2"){
+			candy.relese(thing);
+			candy.relese(thing);		
 		}
 
 	}).on('connect_failed', function () {
@@ -51,8 +44,8 @@ var connectThings = function (things){
 	things.map(connectCandy);
 };	
 
-tellstick.getThings(connectThings);
-
+candy.getThings(connectThings);
+console.log("end");
 
 process.on('uncaughtException', function(err){
 	console.log('Something bad happened: ' + err);
